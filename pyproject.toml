@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "langman"
+version = "0.1.0"
+description = ""
+authors = ["William Parker"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+SQLAlchemy = "^2.0.23"
+Flask = "^3.0.0"
+flask-restplus = "^0.13.0"
+PyYAML = "^6.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
