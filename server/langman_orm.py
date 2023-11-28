@@ -1,4 +1,4 @@
-from slqalchemy import create_engine, Column, types, MetaData
+from slqalchemy import Column, types, MetaData
 from slqalchemy.ext.declarative import declarative_base
 
 meta = MetaData()
