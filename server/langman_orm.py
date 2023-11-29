@@ -1,8 +1,10 @@
-from slqalchemy import Column, types, MetaData
-from slqalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, types
+from sqlalchemy.ext.declarative import declarative_base
 
-meta = MetaData()
-base_games = declarative_base(meta)
+# meta = MetaData()
+# base_games = declarative_base(meta)
+
+base_games = declarative_base()
 
 
 class Usage(base_games):
@@ -15,7 +17,7 @@ class Usage(base_games):
     """
 
     __tablename__ = "usages"
-    usage_id = Column(types.Integrer, primary_key=True)
+    usage_id = Column(types.Integer, primary_key=True)
     language = Column(
         types.Enum("en", "es", "fr", name="language_codes"), nullable=False
     )
