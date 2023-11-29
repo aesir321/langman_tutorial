@@ -8,7 +8,10 @@
 
 - `python -m pip install --user pipx`
 - `pipx install poetry`
-- `poetry shell`
+
+### Install git hook scripts
+
+- `poetry run pre-commit install`
 
 ### Create database
 
