@@ -2,9 +2,10 @@ from sqlalchemy import Column, types, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 
 base_games = declarative_base()
+base_usage = declarative_base()
 
 
-class Usage(base_games):
+class Usage(base_usage):
     """Table ``usages`` with fields:
     * ``usage_id`` - UUID primary key string length of 38
     * ``language`` - Two-letter language code (en, es, fr)

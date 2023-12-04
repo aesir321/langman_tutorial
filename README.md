@@ -15,6 +15,7 @@
 
 ### Create database
 
+- `wget https://github.com/socratecha/frapbook-v1.0-langman/raw/master/data/usages.csv`
 - `export FLASK_APP=server.prepare_orm`
 - `export FLASK_ENV=dev_lite`
 - `export LC_ALL=C.UTF-8 && export LANG=C.UTF-8`
