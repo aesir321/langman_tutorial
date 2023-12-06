@@ -12,6 +12,8 @@ Flask = "^3.0.0"
 flask-restplus = "^0.13.0"
 PyYAML = "^6.0.1"
 ruff = "^0.1.6"
+psycopg2-binary = "^2.9.9"
+flask-cors = "^4.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
