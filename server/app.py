@@ -6,7 +6,7 @@ from .util import get_config
 games_api = Namespace("games", description="Creating and playing games")
 
 
-@games_api.rout("")
+@games_api.route("")
 class Games(Resource):
     pass
 
