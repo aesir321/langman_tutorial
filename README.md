@@ -1,5 +1,7 @@
 # langman_tutorial
 
+This tutorial is following the course available at educative.io called "Quick Start Full Stack Web Development".
+
 ## Developer Setup
 
 ### Clone the repository
