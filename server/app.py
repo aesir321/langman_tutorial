@@ -17,7 +17,7 @@ class OneGame(Resource):
 
 # Create the app and configure it
 app = Flask(__name__)
-app.config.update(get_config(app.config["ENV"]), app.open_resource("config.yaml"))
+app.config.update(get_config(app.config["ENV"], app.open_resource("config.yaml")))
 CORS(app)
 api = Api(app)
 api.add_namespace(games_api, path="/api/games")
