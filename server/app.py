@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_restplus import Resource, Api, Namespace
+from flask_restx import Resource, Api, Namespace
 from flask_cors import CORS
 from .util import get_config
 
