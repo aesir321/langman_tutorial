@@ -1,6 +1,6 @@
 # langman_tutorial
 
-This tutorial is following the course available at educative.io called "Quick Start Full Stack Web Development".
+This tutorial is following the course available at educative.io called "Quick Start Full Stack Web Development". All instructions are assumed to be run in the root directory of the repository.
 
 ## Developer Setup
 
@@ -28,3 +28,8 @@ This tutorial is following the course available at educative.io called "Quick St
 - Mac: `brew install sqlite`
 - Windows: `choco install sqlite`
 - Linux: `apt install sqlite`
+
+### Create .flaskenv file
+
+- `touch .flaskenv`
+- Set the `FLASK_APP` and `FLASK_ENV` variables accordingly.
