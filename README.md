@@ -10,6 +10,7 @@ This tutorial is following the course available at educative.io called "Quick St
 
 - `python -m pip install --user pipx`
 - `pipx install poetry`
+- `poetry install`
 
 ### Install git hook scripts
 
