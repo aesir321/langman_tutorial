@@ -19,6 +19,8 @@ This tutorial is following the course available at educative.io called "Quick St
 ### Create database
 
 - `wget https://github.com/socratecha/frapbook-v1.0-langman/raw/master/data/usages.csv`
+- `mkdir data`
+- `mv usages.csv data/`
 - `export FLASK_APP=server.prepare_orm`
 - `export FLASK_ENV=dev_lite`
 - `export LC_ALL=C.UTF-8 && export LANG=C.UTF-8`
@@ -32,5 +34,6 @@ This tutorial is following the course available at educative.io called "Quick St
 
 ### Create .flaskenv file
 
+- `touch .env`
 - `touch .flaskenv`
 - Set the `FLASK_APP` and `FLASK_ENV` variables accordingly.
