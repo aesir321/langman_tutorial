@@ -35,5 +35,6 @@ This tutorial is following the course available at educative.io called "Quick St
 ### Create .flaskenv file
 
 - `touch .env`
+- Set DB_USAGE and DB_GAMES variables accordingly.
 - `touch .flaskenv`
 - Set the `FLASK_APP` and `FLASK_ENV` variables accordingly.
