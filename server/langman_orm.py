@@ -1,5 +1,7 @@
 from sqlalchemy import Column, types, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
+import datetime
+import json
 
 base_games = declarative_base()
 base_usage = declarative_base()
@@ -45,6 +47,50 @@ class User(base_games):
     first_time = Column(types.DateTime)
     total_time = Column(types.Interval)
     avg_time = Column(types.Interval)
+
+    def _incr_json_field(self, field: str, key):
+        """Increment the value of self.``field``[``key``] by one where ``field`` is a JSON text string.  (Does not commit.)
+
+        Args:
+            field str: JSON test string
+            key (_type_): _description_
+        """
+        d = json.loads(getattr(self, field))
+        d[key] = d.get(key, 0) + 1
+        setattr(self, field, json.dumps(d))
+
+    def _decr_json_field(self, field: str, key):
+        """Decrement the value of self.``field``[``key``] by one where ``field`` is a JSON text string.  (Does not commit.)
+
+        Args:
+            field str: JSON text string.  Can take values "outcomes" or "by_lang"
+            key str: Can take values "active", "en", "es" and "fr"
+        """
+        d = json.loads(getattr(self, field))
+        d[key] = d.get(key, 0) + 1
+        setattr(self, field, json.dumps(d))
+
+    def _game_started(self, lang):
+        """Update the number of games ``num_games`` and both ``outcomes`` and ``by_lang`` counts by one.  (Does not commit.)
+
+        Args:
+            lang (_type_): _description_
+        """
+        self.num_games = (self.num_games or 0) + 1
+        self._incr_json_field("outcomes", "active")
+        self._incr_json_field("by_lang", lang)
+
+    def _game_ended(self, outcome, time_delta):
+        """Update the ``total_time`` and ``avg_time`` according to a game that took ``time_delta`` time.  Also, update ``outcomes`` by converting one active game to have outcome ``outcome``.  (Does not commit.)
+
+        Args:
+            outcome (_type_): _description_
+            time_delta (_type_): _description_
+        """
+        self._decr_json_field("outcomes", "active")
+        self._incr_json_field("outcomes", outcome)
+        self.total_time = time_delta + (self.total_time or datetime.timedelta(0))
+        self.avg_time = self.total_time / self.num_games
 
 
 class Game(base_games):
