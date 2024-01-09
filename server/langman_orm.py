@@ -2,6 +2,7 @@ from sqlalchemy import Column, types, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 import datetime
 import json
+from .util import date_to_ordinal
 
 base_games = declarative_base()
 base_usage = declarative_base()
@@ -114,3 +115,23 @@ class Game(base_games):
     bad_guesses = Column(types.Integer)
     start_time = Column(types.DateTime)
     end_time = Column(types.DateTime)
+
+    def _result(self):
+        """Return the result of the game: lost, won or active."""
+        if self.bad_guesses == 6:
+            return "lost"
+        elif "_" not in self.reveal_word:
+            return "won"
+        else:
+            return "active"
+
+    def _to_dict(self):
+        """Convert the game into a dictionary suitable for JSON serialisation.
+
+        Special attention is paid to DateTime fields using the date_to_ordinals function.
+        """
+        as_dict = {k: v for k, v in self.__dict__.items() if not k.startswith("_")}
+        as_dict["result"] = self._result()
+        as_dict["start_time"] = date_to_ordinal(as_dict.get("start_time"))
+        as_dict["end_time"] = date_to_ordinal(as_dict.get("end_time"))
+        return as_dict

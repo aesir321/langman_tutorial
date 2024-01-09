@@ -85,9 +85,40 @@ class Games(Resource):
 class OneGame(Resource):
     def get(self, game_id):
         """
-        Get the state of the game
+        Get the game ``game_id`` information.
+
+        :route: ``/<game_id>`` GET
+
+        :returns:
+            The object for a game, including:
+                * ``game_id`` The game's UUID
+                * ``player`` The player's name
+                * ``usage_id`` The game usage id from the Usages table
+                * ``guessed`` A string of guessed letters
+                * ``reveal_word`` Guessed letters in otherwise blanked word string
+                * ``bad_guesses`` Number of incorrect guesses so far
+                * ``start_time`` The epoch ordinal time when the game began
+                * ``end_time`` The epoch ordinal time when the game ended
+                * ``result`` Game outcome from ("lost", "won", "active")
+                * ``usage`` The full sentence example with guess-word blanked
+                * ``lang`` The language of the example such as "en"
+                * ``source`` The book from which the usage example originated
         """
-        return {"message": "Game GET under construction"}
+        # check input is valid
+        game = g.games_db.query(Game).filter(Game.game_id == game_id).one_or_none()
+
+        # if game does not exist, produce error code
+        if game is None:
+            games_api.abort(404, f"Game with id {game_id} does not exist.")
+        # get usage record because it contains the language and usage example
+        usage = g.usage_db.query(Usage).filter(Usage.usage_id == game.usage_id).one()
+
+        # return the game state
+        game_dict = game._to_dict()
+        game_dict["usage"] = usage.usage.format(words="_" * len(usage.secret_word))
+        game_dict["lang"] = usage.language
+        game_dict["source"] = usage.source
+        return game_dict
 
     def put(self, game_id):
         """
