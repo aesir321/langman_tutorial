@@ -125,7 +125,7 @@ class OneGame(Resource):
 
 # Create the app and configure it
 app = Flask(__name__)
-app.config.from_object("default_config")
+app.config.from_object("config")
 app.config.from_envvar("SETTINGS_FILE")
 CORS(app)
 api = Api(app)

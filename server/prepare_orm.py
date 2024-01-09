@@ -1,20 +1,19 @@
-import os
 import csv
 from sqlalchemy import create_engine
 import sqlalchemy.orm
 from .langman_orm import base_games, Usage, base_usage
-from .util import get_config
 from flask import Flask
 
 app = Flask(__name__)
+app.config.from_object("config")
+app.config.from_envvar("SETTINGS_FILE")
 
 
 @app.cli.command("init-db")
 def init_db():
-    config = get_config(os.environ["FLASK_ENV"], open("server/config.yaml"))
-    db_usage = create_engine(config["DB_USAGE"])
+    db_usage = create_engine(app.config["DB_USAGE"])
     base_usage.metadata.create_all(db_usage)
-    db_games = create_engine(config["DB_GAMES"])
+    db_games = create_engine(app.config["DB_GAMES"])
     base_games.metadata.create_all(db_games)
 
     Session = sqlalchemy.orm.sessionmaker(db_usage)
