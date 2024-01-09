@@ -43,7 +43,7 @@ class User(base_games):
     user_name = Column(types.String(length=30), nullable=False)
     num_games = Column(types.Integer, default=0)
     outcomes = Column(types.Text, default="{}")
-    by_lang = Column(types.Text, default={})
+    by_lang = Column(types.Text, default="{}")
     first_time = Column(types.DateTime)
     total_time = Column(types.Interval)
     avg_time = Column(types.Interval)
