@@ -80,6 +80,21 @@ class Games(Resource):
 
         return {"message": "success", "game_id": new_game_id}
 
+
+@games_api.route("/<game_id>")
+class OneGame(Resource):
+    def get(self, game_id):
+        """
+        Get the state of the game
+        """
+        return {"message": "Game GET under construction"}
+
+    def put(self, game_id):
+        """
+        Guess a letter and update the game state accordingly.
+        """
+        return {"message": "Game PUT under construction"}
+
     def delete(self, game_id):
         """Delete record for game ``game_id``
 
@@ -100,27 +115,6 @@ class Games(Resource):
         else:
             message = "Zero records deleted"
         return {"message": message}
-
-
-@games_api.route("/<game_id>")
-class OneGame(Resource):
-    def get(self, game_id):
-        """
-        Get the state of the game
-        """
-        return {"message": "Game GET under construction"}
-
-    def put(self, game_id):
-        """
-        Guess a letter and update the game state accordingly.
-        """
-        return {"message": "Game PUT under construction"}
-
-    def delete(self, game_id):
-        """
-        End the game, delete the record
-        """
-        return {"message": "Game delete under construction"}
 
 
 # Create the app and configure it
