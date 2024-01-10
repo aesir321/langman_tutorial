@@ -115,7 +115,7 @@ class OneGame(Resource):
 
         # return the game state
         game_dict = game._to_dict()
-        game_dict["usage"] = usage.usage.format(words="_" * len(usage.secret_word))
+        game_dict["usage"] = usage.usage.format(word="_" * len(usage.secret_word))
         game_dict["lang"] = usage.language
         game_dict["source"] = usage.source
         return game_dict
