@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from flask_restx import Resource, Api, Namespace
 from flask_cors import CORS
 from .langman_orm import Game, Usage, User
+from unidecode import unidecode
 
 games_api = Namespace("games", description="Creating and playing games")
 
@@ -130,10 +131,12 @@ class OneGame(Resource):
         if letter in game.guessed:
             games_api.abort(403, f"Letter {letter} was already guessed.")
         game.guessed = game.guessed + letter
-        if letter in usage.secret_word.lower():
+        if letter in unidecode(usage.secret_word.lower()):
             game.reveal_word = "".join(
                 [
-                    guessed_letter if guessed_letter.lower() in game.guessed else "_"
+                    guessed_letter
+                    if unidecode(guessed_letter.lower()) in game.guessed
+                    else "_"
                     for guessed_letter in usage.secret_word
                 ]
             )
